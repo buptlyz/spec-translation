@@ -1,1 +1,1 @@
-# spec-translation
+# 翻译各种specification 
