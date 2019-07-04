@@ -186,6 +186,65 @@ partial interface Navigator {
 
 ### 3.2 处理模型
 
+On calling the sendBeacon() method with url and optional data, the following steps must be run:
+
+Set base to the entry settings object's API base URL.
+
+Set origin to the entry settings object's origin.
+
+Set parsedUrl to the result of the URL parser steps with url and base. If the algorithm returns an error, or if parsedUrl's scheme is not "http" or "https", throw a "TypeError" exception and terminate these steps.
+
+Let headerList be an empty list.
+Let corsMode be "no-cors".
+If data is not null:
+
+Extract object's byte stream (transmittedData) and content type (contentType).
+If the amount of data that can be queued to be sent by keepalive enabled requests is exceeded by the size of transmittedData (as defined in http-network-or-cache-fetch), set the return value to false and terminate these steps.
+NOTE
+Requests initiated via the Beacon API automatically set the keepalive flag, and developers can similarly set the same flag manually when using the Fetch API. All requests with this flag set share the same in-flight quota restrictions that is enforced within the Fetch API.
+
+If contentType is not null:
+Set corsMode to "cors".
+If contentType value is a CORS-safelisted request-header value for the Content-Type header, set corsMode to "no-cors".
+Append a Content-Type header with value contentType to headerList.
+Set the return value to true, return the sendBeacon() call, and continue to run the following steps in parallel:
+Let req be a new request, initialized as follows:
+
+method
+POST
+url
+parsedUrl
+header list
+headerList
+origin
+origin
+keep-alive flag
+true
+body
+transmittedData
+mode
+corsMode
+credentials mode
+include
+Fetch req.
+
+## 4. Privacy and Security
+
+The sendBeacon() interface provides an asynchronous and non-blocking mechanism for delivery of data. This API can be used to:
+
+Report client-side events to the server. The delivery is prioritized and scheduled by the user agent such that it does not block other interactive work and makes efficient use of system resources.
+Report session data when the page transitions to background state or is being unloaded, without blocking the user agent.
+Other use cases that require delivery of small payloads and do not expect a response callback.
+The delivered data might contain potentially sensitive information, for example, data about a user's activity on a web page, to a server. While this can have privacy implications for the user, existing methods, such as scripted form-submit, image beacons, and XHR/fetch requests provide similar capabilities, but come with various and costly performance tradeoffs: the requests can be aborted by the user agent unless the developer blocks the user agent from processing other events (e.g. by invoking a synchronous request, or spinning in an empty loop), and the user agent is unable to prioritize and coalesce such requests to optimize use of system resources.
+
+A request initiated by sendBeacon() is subject to following properties:
+
+If the request does not contain a payload, or the request Content-Type is a CORS-safelisted request-header, then the request mode is no-cors—similar to an image beacon or form-post respectively.
+Otherwise, a CORS preflight is made and the server needs to first allow such requests by returning the appropriate set of CORS headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin, Access-Control-Allow-Headers.
+As such, from the security perspective, the Beacon API is subject to same security policies as the current methods in use by developers. Similarly, from the privacy perspective, the resulting requests are initiated immediately when the API is called, or upon a page visibility change, which restricts the exposed information (e.g. user's IP address) to existing lifecycle events accessible to the developers. However, user agents might consider alternative methods to surface such requests to provide transparency to users.
+
+Compared to the alternatives, the sendBeacon() API does apply two restrictions: there is no callback method, and the payload size can be restricted by the user agent. Otherwise, the sendBeacon() API is not subject to any additional restrictions. The user agent ought not skip or throttle processing of sendBeacon() calls, as they can contain critical application state, events, and analytics data. Similarly, the user agent ought not disable sendBeacon() when in "private browsing" or equivalent mode, both to avoid breaking the application and to avoid leaking that the user is in such mode.
+
 [sendBeacon]: https://w3c.github.io/beacon/#dom-navigator-sendbeacon
 [\[PAGE-VISIBILITY-2\]]: https://w3c.github.io/beacon/#bib-page-visibility-2
 [visibilitychange]: https://www.w3.org/TR/page-visibility-2/#dfn-visibilitychange
