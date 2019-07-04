@@ -73,4 +73,4 @@ sendBeacon（）不会做什么，也不打算解决：
 * sendBeacon（）方法不为脱机存储或传递提供特殊处理。 信标请求与任何其他请求一样，可以与[[SERVICE-WORKERS]](https://w3c.github.io/beacon/#bib-service-workers)结合使用，以在必要时提供离线功能。
 
 [sendBeacon]: https://w3c.github.io/beacon/#dom-navigator-sendbeacon
-[[PAGE-VISIBILITY-2]]: https://w3c.github.io/beacon/#bib-page-visibility-2
+[\[PAGE-VISIBILITY-2\]]: https://w3c.github.io/beacon/#bib-page-visibility-2
