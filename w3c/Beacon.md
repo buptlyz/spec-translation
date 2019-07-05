@@ -70,7 +70,7 @@ Web应用程序通常需要向一个或多个服务器发出报告事件、状�
 
 [sendBeacon][]不会做什么，也不打算解决：
 
-* [sendBeacon][]方法不为脱机存储或传递提供特殊处理。 信标请求与任何其他请求一样，可以与[[SERVICE-WORKERS]][]结合使用，以在必要时提供离线功能。
+* [sendBeacon][]方法不为脱机存储或传递提供特殊处理。 信标请求与任何其他请求一样，可以与[\[SERVICE-WORKERS\]][]结合使用，以在必要时提供离线功能。
 * [sendBeacon][]方法不用于提供后台同步或传输功能。 用户代理限制最大可接受的有效负载大小，以确保信标请求能够快速且及时地完成。
 * [sendBeacon][]方法不提供自定义请求方法，提供自定义请求标头或更改请求和响应的其他[处理属性][]的功能。 需要对此类请求进行非默认设置的应用程序应使用[[FETCH]] API并将[keep-alive][]标志设置为`true`。
 
@@ -78,7 +78,7 @@ Web应用程序通常需要向一个或多个服务器发出报告事件、状�
 
 本规范中的所有图表，示例和注释都是非规范性的，所有明确标记为非规范性的部分也是如此。本规范中的其他所有内容都是规范性的。
 
-在本文件的规范部分中，关键词“必须”，“必须”，“不需要”，“应该”，“不应该”，“推荐”，“可以”和“可选”应该被解释为描述在[[RFC2119]][]中。为了便于阅读，这些单词在本规范中并未以全部大写字母出现。
+在本文件的规范部分中，关键词“必须”，“必须”，“不需要”，“应该”，“不应该”，“推荐”，“可以”和“可选”应该被解释为描述在[\[RFC2119\]][]中。为了便于阅读，这些单词在本规范中并未以全部大写字母出现。
 
 作为算法的一部分在命令中表达的要求（例如“剥离任何前导空格字符”或“返回错误并中止这些步骤”）将被解释为关键词的意思（“必须”，“应该”，“可能“等”用于引入算法。
 
@@ -89,12 +89,14 @@ Web应用程序通常需要向一个或多个服务器发出报告事件、状�
 ### 2.1 依赖(TODO 外链)
 
 #### DOM
+
 The following terms are defined in the DOM specification: [DOM]
 
 * the document URL
 * document
 
 #### HTML
+
 The following terms are defined in the HTML specification: [HTML]
 
 * API base URL
@@ -105,6 +107,7 @@ The following terms are defined in the HTML specification: [HTML]
 * the Navigator object
 
 #### Fetch
+
 The following terms are defined in the HTML specification: [FETCH]
 
 * header value
@@ -127,6 +130,7 @@ The following terms are defined in the HTML specification: [FETCH]
 * the Access-Control-Allow-Headers header
 
 #### URL
+
 The following terms are defined in the URL specification: [URL]
 
 * URL parser
@@ -142,6 +146,7 @@ The following terms are defined in the Web IDL specification:
 * TypeError type
 
 #### Page Visibility
+
 The following term is defined in the Page Visibility specification: [PAGE-VISIBILITY-2]
 
 * visibilitychange
