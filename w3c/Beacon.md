@@ -194,32 +194,32 @@ partial interface Navigator {
 4. Let headerList be an empty list.
 5. Let corsMode be "no-cors".
 6. If data is not null:
-  1. Extract object's byte stream (transmittedData) and content type (contentType).
-  2. If the amount of data that can be queued to be sent by keepalive enabled requests is exceeded by the size of transmittedData (as defined in http-network-or-cache-fetch), set the return value to false and terminate these steps.
-  > Requests initiated via the Beacon API automatically set the keepalive flag, and developers can similarly set the same flag manually when using the Fetch API. All requests with this flag set share the same in-flight quota restrictions that is enforced within the Fetch API.
-  3. If contentType is not null:
-    * Set corsMode to "cors".
-    * If contentType value is a CORS-safelisted request-header value for the Content-Type header, set corsMode to "no-cors".
-    * Append a Content-Type header with value contentType to headerList.
+    1. Extract object's byte stream (transmittedData) and content type (contentType).
+    2. If the amount of data that can be queued to be sent by keepalive enabled requests is exceeded by the size of transmittedData (as defined in http-network-or-cache-fetch), set the return value to false and terminate these steps.
+    > Requests initiated via the Beacon API automatically set the keepalive flag, and developers can similarly set the same flag manually when using the Fetch API. All requests with this flag set share the same in-flight quota restrictions that is enforced within the Fetch API.
+    3. If contentType is not null:
+        * Set corsMode to "cors".
+        * If contentType value is a CORS-safelisted request-header value for the Content-Type header, set corsMode to "no-cors".
+        * Append a Content-Type header with value contentType to headerList.
 7. Set the return value to true, return the sendBeacon() call, and continue to run the following steps in parallel:
-  1. Let req be a new request, initialized as follows:
-    method
-      POST
-    url
-      parsedUrl
-    header list
-      headerList
-    origin
-      origin
-    keep-alive flag
-      `true`
-    body
-      transmittedData
-    mode
-      corsMode
-    credentials mode
-      include
-  2. Fetch req.
+    1. Let req be a new request, initialized as follows:
+        method
+            POST
+        url
+            parsedUrl
+        header list
+            headerList
+        origin
+            origin
+        keep-alive flag
+            `true`
+        body
+            transmittedData
+        mode
+            corsMode
+        credentials mode
+            include
+    2. Fetch req.
 
 ## 4. 隐私和安全
 
