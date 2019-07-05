@@ -188,38 +188,38 @@ partial interface Navigator {
 
 在使用url和可选数据调用sendBeacon（）方法时，必须运行以下步骤：
 
-1. Set base to the entry settings object's API base URL.
-2. Set origin to the entry settings object's origin.
-3. Set parsedUrl to the result of the URL parser steps with url and base. If the algorithm returns an error, or if parsedUrl's scheme is not "http" or "https", throw a "TypeError" exception and terminate these steps.
+1. Set base to the [entry settings object][]'s [API base URL][].
+2. Set origin to the [entry settings object][]'s [origin][].
+3. Set parsedUrl to the result of the [URL parser][] steps with url and base. If the algorithm returns an error, or if parsedUrl's [scheme][] is not "http" or "https", [throw][] a "[TypeError][]" exception and terminate these steps.
 4. Let headerList be an empty list.
-5. Let corsMode be "no-cors".
-6. If data is not null:
-    1. Extract object's byte stream (transmittedData) and content type (contentType).
-    2. If the amount of data that can be queued to be sent by keepalive enabled requests is exceeded by the size of transmittedData (as defined in http-network-or-cache-fetch), set the return value to false and terminate these steps.
-    > Requests initiated via the Beacon API automatically set the keepalive flag, and developers can similarly set the same flag manually when using the Fetch API. All requests with this flag set share the same in-flight quota restrictions that is enforced within the Fetch API.
+5. Let corsMode be "`no-cors`".
+6. If data is not `null`:
+    1. [Extract][] object's byte stream (transmittedData) and content type (contentType).
+    2. If the amount of data that can be queued to be sent by [keepalive][] enabled requests is exceeded by the size of transmittedData (as defined in [http-network-or-cache-fetch][]), set the return value to false and terminate these steps.
+      > 通过Beacon API发起的请求会自动设置keepalive标志，开发人员可以在使用Fetch API时手动设置相同的标志。 设置了此标志的所有请求共享在Fetch API中强制执行的相同的飞行中配额限制。
     3. If contentType is not null:
-        * Set corsMode to "cors".
-        * If contentType value is a CORS-safelisted request-header value for the Content-Type header, set corsMode to "no-cors".
-        * Append a Content-Type header with value contentType to headerList.
-7. Set the return value to true, return the sendBeacon() call, and continue to run the following steps in parallel:
-    1. Let req be a new request, initialized as follows:
-        method
-            POST
-        url
-            parsedUrl
-        header list
-            headerList
-        origin
-            origin
-        keep-alive flag
-            `true`
-        body
-            transmittedData
-        mode
-            corsMode
-        credentials mode
-            include
-    2. Fetch req.
+        * Set corsMode to "`cors`".
+        * If contentType value is a [CORS-safelisted request-header][] value for the `Content-Type` header, set corsMode to "`no-cors`".
+        * Append a `Content-Type` header with value contentType to headerList.
+7. 将返回值设置为true，返回sendBeacon（）调用，并继续并行运行以下步骤：
+    1. Let req be a new [request][], initialized as follows:  
+        [method][]  
+          &emsp;`POST`  
+        [url][]  
+          &emsp;parsedUrl  
+        [header list][]  
+          &emsp;headerList  
+        [origin][]  
+          &emsp;origin  
+        [keep-alive][] flag  
+          &emsp;`true`  
+        [body][]  
+          &emsp;transmittedData  
+        [mode][]  
+          &emsp;corsMode  
+        [credentials mode][]  
+          &emsp;include  
+    2. [Fetch][] req.
 
 ## 4. 隐私和安全
 
@@ -267,3 +267,21 @@ sendBeacon（）发起的请求受以下属性约束：
 [Access-Control-Allow-Credentials]: https://fetch.spec.whatwg.org/#http-access-control-allow-credentials
 [Access-Control-Allow-Origin]: https://fetch.spec.whatwg.org/#http-access-control-allow-origin
 [Access-Control-Allow-Headers]: https://fetch.spec.whatwg.org/#http-access-control-allow-headers
+[entry settings object']: https://html.spec.whatwg.org/multipage/#entry-settings-object
+[API base URL]: https://html.spec.whatwg.org/multipage/#api-base-url
+[entry settings object]: https://html.spec.whatwg.org/multipage/#entry-settings-object
+[origin]: https://w3c.github.io/beacon/#resource-origin
+[URL parser]: https://url.spec.whatwg.org/#concept-url-parser
+[scheme]: https://url.spec.whatwg.org/#concept-url-scheme
+[throw]: https://heycam.github.io/webidl/#dfn-throw
+[TypeError]: https://heycam.github.io/webidl/#exceptiondef-typeerror
+[Extract]: https://fetch.spec.whatwg.org/#concept-bodyinit-extract
+[CORS-safelisted request-header]: https://fetch.spec.whatwg.org/#cors-safelisted-request-header
+[request]: https://fetch.spec.whatwg.org/#concept-request
+[method]: https://fetch.spec.whatwg.org/#concept-request-method
+[url]: https://w3c.github.io/beacon/#request-url
+[header list]: https://fetch.spec.whatwg.org/#concept-request-header-list
+[body]: https://fetch.spec.whatwg.org/#concept-request-body
+[mode]: https://fetch.spec.whatwg.org/#concept-request-mode
+[credentials mode]: https://fetch.spec.whatwg.org/#concept-request-credentials-mode
+[Fetch]: https://fetch.spec.whatwg.org/#concept-fetch
