@@ -186,7 +186,7 @@ partial interface Navigator {
 
 ### 3.2 处理模型
 
-在使用url和可选数据调用sendBeacon（）方法时，必须运行以下步骤：
+在使用url和可选数据调用[sendBeacon][]方法时，必须运行以下步骤：
 
 1. Set base to the [entry settings object][]'s [API base URL][].
 2. Set origin to the [entry settings object][]'s [origin][].
@@ -201,7 +201,7 @@ partial interface Navigator {
         * Set corsMode to "`cors`".
         * If contentType value is a [CORS-safelisted request-header][] value for the `Content-Type` header, set corsMode to "`no-cors`".
         * Append a `Content-Type` header with value contentType to headerList.
-7. 将返回值设置为true，返回sendBeacon（）调用，并继续并行运行以下步骤：
+7. 将返回值设置为true，返回[sendBeacon][]调用，并继续并行运行以下步骤：
     1. Let req be a new [request][], initialized as follows:  
         [method][]  
           &emsp;`POST`  
@@ -223,7 +223,7 @@ partial interface Navigator {
 
 ## 4. 隐私和安全
 
-sendBeacon（）接口提供了一种用于传递数据的异步和非阻塞机制。 此API可用于：
+[sendBeacon][]接口提供了一种用于传递数据的异步和非阻塞机制。 此API可用于：
 
 * 向客户端报告服务器端事件。 用户代理对传递进行优先级排序和调度，使其不会阻止其他交互式工作并有效利用系统资源。
 * 当页面转换为后台状态或正在卸载时报告会话数据，而不阻止用户代理。
@@ -231,14 +231,14 @@ sendBeacon（）接口提供了一种用于传递数据的异步和非阻塞机�
 
 传递的数据可能包含潜在的敏感信息，例如，有关用户在网页上与服务器的活动的数据。 虽然这可能会对用户产生隐私影响，但现有方法（如脚本化表单提交，图像信标和XHR /获取请求）提供了类似的功能，但会带来各种昂贵的性能权衡：请求可以被用户代理中止 除非开发人员阻止用户代理处理其他事件（例如，通过调用同步请求或在空循环中旋转），并且用户代理无法确定优先级并合并此类请求以优化系统资源的使用。
 
-sendBeacon（）发起的请求受以下属性约束：
+[sendBeacon][]发起的请求受以下属性约束：
 
 * 如果请求不包含有效负载，或者请求Content-Type是[CORS安全的请求报头][]，则请求模式是`no-cors`——分别与图像信标或表单信息类似。
 * 否则，进行CORS预检，服务器需要首先通过返回适当的CORS标头集来允许此类请求：[Access-Control-Allow-Credentials][]，[Access-Control-Allow-Origin][]，[Access-Control-Allow-Headers][]。
 
 因此，从安全角度来看，Beacon API遵循与开发人员使用的当前方法相同的安全策略。类似地，从隐私角度来看，在调用API时立即启动所得到的请求，或者在页面可见性改变时立即启动，这将公开的信息（例如用户的IP地址）限制为开发者可访问的现有生命周期事件。但是，用户代理可能会考虑使用其他方法来表示此类请求以向用户提供透明度。
 
-与备选方案相比，sendBeacon（）API确实应用了两个限制：没有回调方法，并且有效负载大小可以由用户代理限制。否则，sendBeacon（）API不受任何其他限制。用户代理不应跳过或限制sendBeacon（）调用的处理，因为它们可以包含关键应用程序状态，事件和分析数据。类似地，用户代理在“私人浏览”或等效模式时不应禁用sendBeacon（），以避免破坏应用程序并避免泄漏用户处于这种模式。
+与备选方案相比，[sendBeacon][]API确实应用了两个限制：没有回调方法，并且有效负载大小可以由用户代理限制。否则，[sendBeacon][]API不受任何其他限制。用户代理不应跳过或限制[sendBeacon][]调用的处理，因为它们可以包含关键应用程序状态，事件和分析数据。类似地，用户代理在“私人浏览”或等效模式时不应禁用[sendBeacon][]，以避免破坏应用程序并避免泄漏用户处于这种模式。
 
 [sendBeacon]: https://w3c.github.io/beacon/#dom-navigator-sendbeacon
 [\[PAGE-VISIBILITY-2\]]: https://w3c.github.io/beacon/#bib-page-visibility-2
