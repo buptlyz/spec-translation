@@ -3,7 +3,7 @@
 sendBeacon（） -> [sendBeacon]()
 时间关键 -> time-critical
 
-[w3c spec地址]()
+[w3c spec地址][]
 
 此规范定义了一个接口，Web开发人员可以使用该接口来调度异步和非阻塞的数据传输，从而最大限度地减少与其他time-critical操作的资源争用，同时确保仍然处理这些请求并将其传递到目标。
 
